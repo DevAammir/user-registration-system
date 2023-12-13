@@ -1,0 +1,15 @@
+# WORDPERSS USER REGISTRATION BY AAMIR
+ 
+This plugin provides the following features:
+
+## USER LOGIN
+ 
+
+## USER REGISTRATION
+ 
+
+## USER ACTIVATION
+ 
+
+## PASSWORD RESET (FORGOT PASSWORD)
+ 
