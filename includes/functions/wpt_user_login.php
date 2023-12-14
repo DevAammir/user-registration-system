@@ -29,18 +29,18 @@ function user_login_cb()
             'label' => 'Login',
             'name'  => 'wpt_user_login_button',
             'id'    => 'wpt_user_login_button',
-            'class' => 'button button-primary',
+            'class' => 'button button-primary btn btn-primary',
         ]); ?>
     </form>
 
     <script>
         jQuery(document).ready(function($) {
-            let WPT_AJAX = '<?php echo WPT_AJAX; ?>';
+            let WPT_AJAX = '<?php echo admin_url('admin-ajax.php'); ?>';
 
             // Attach a click event handler to the login button
             $('#wpt_user_login_button').on('click', function(e) {
                 e.preventDefault(); // Prevent the default form submission
-
+// debugger;
                 // Get the username and password values
                 var username = $('#wpt_username').val();
                 var password = $('#wpt_password').val();
@@ -72,7 +72,7 @@ function user_login_cb()
                     if (result.status === 200) {
                         window.location.href = result.redirect;
                     } else {
-                        $('.error a').attr('href', '<?php echo home_url(); ?>/lost-password/');
+                        $('.error a').attr('href', '<?php echo home_url(); ?>/'.WPT_CONFIG['wpt_reset_password_link']);
                     }
                 });
             });

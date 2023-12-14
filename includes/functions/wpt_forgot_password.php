@@ -1,6 +1,6 @@
 <?php
 // Add this shortcode to your theme's functions.php file or a custom plugin
-add_shortcode('custom_forgot_password_form', 'custom_forgot_password_shortcode');
+add_shortcode('wpt_forgot_password_form', 'custom_forgot_password_shortcode');
 
 function custom_forgot_password_shortcode() {
     ob_start(); ?>

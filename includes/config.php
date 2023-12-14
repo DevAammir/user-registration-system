@@ -35,8 +35,8 @@ define('WPT_REGISTRATION_FIELDS', $registration_fields);
 
 
 $wpt_config = [
-    'wpt_user_activation_link' => site_url('/actiavate-account'),
-    'wpt_reset_password_link' => site_url('/reset-password'),
+    'wpt_user_activation_link' =>  '/activate-account',
+    'wpt_reset_password_link' =>  '/reset-password',
 ];
 
 define('WPT_CONFIG', $wpt_config);

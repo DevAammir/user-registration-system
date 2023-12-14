@@ -242,7 +242,7 @@ function wpt_register_user()
         $billing_country = sanitize_text_field($_POST['billing_country']);
         $profile_image = $_FILES['profile_image'];
         $username = $first_name; // . '-' . $last_name;
-        $wpt_user_activation_link = $_POST['wpt_user_activation_link'];
+        $wpt_user_activation_link = site_url().$_POST['wpt_user_activation_link'];
         $status = 400;
         $message = '';
         $redirect = '';
@@ -296,7 +296,7 @@ function wpt_register_user()
                     'billing_state' => $billing_state,
                     'billing_country' => $billing_country,
                     // 'confirmation_token' => $confirmation_token,
-                    // 'wpt_activation_code' => $wpt_activation_code,
+                    'wpt_activation_code' => $wpt_activation_code,
                 ];
 
                 foreach ($user_metadata as $key => $value) {

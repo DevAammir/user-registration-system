@@ -1,6 +1,13 @@
 <?php
 register_activation_hook(URS_FILE, 'urs_pages_upon_plugin_activation');
 
+$activate_account_page = str_replace('_', ' ', WPT_CONFIG['wpt_user_activation_link']);
+$activate_account_page = ucfirst($activate_account_page);
+
+$reset_password_page = str_replace('_', ' ', WPT_CONFIG['wpt_reset_password_link']);
+$reset_password_page = ucfirst($reset_password_page);
+
+
 function urs_pages_upon_plugin_activation()
 {
 

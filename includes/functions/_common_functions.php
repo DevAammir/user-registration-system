@@ -1,6 +1,6 @@
 <?php
 
-function _URS_set_featured_image_via_image_url($post_id, $image)
+function _wpt_set_featured_image_via_image_url($post_id, $image)
 {
     // Include necessary files
     require_once ABSPATH . 'wp-admin/includes/file.php';
@@ -66,7 +66,7 @@ function _URS_set_featured_image_via_image_url($post_id, $image)
  *
  * @return bool              True on success, false on failure.
  */
-function _URS_set_featured_image($post_id, $attachment_id)
+function _wpt_set_featured_image($post_id, $attachment_id)
 {
     // Check if the post ID and attachment ID are valid.
     if (empty($post_id) || empty($attachment_id)) {
@@ -92,7 +92,7 @@ function custom_check_user_activation_status($user, $password) {
     // Check if the user exists
     if ($user instanceof WP_User) {
         // Check if the user has the activation status meta field
-        $activation_status = get_user_meta($user->ID, 'URS_user_status', true);
+        $activation_status = get_user_meta($user->ID, 'wpt_user_status', true);
 
         // Check if the activation status is 'disabled'
         if ($activation_status === 'disabled' || $activation_status === 0) {
