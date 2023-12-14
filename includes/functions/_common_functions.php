@@ -106,7 +106,7 @@ function custom_check_user_activation_status($user, $password) {
 }
 
 
-function _URS_generate_random_string($length = 5) {
+function _wpt_generate_random_string($length = 5) {
     $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
     $randomString = '';
 

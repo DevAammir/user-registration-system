@@ -17,8 +17,6 @@ if (CURRENT_THEME == 'wp-lite') {
 $URS_settings = get_option('URS_settings'); 
 define('URS_SETTINGS', $URS_settings); 
 
-
-
 $registration_fields = [
     'first_name' => 'text',
     'last_name' => 'text',
@@ -33,13 +31,13 @@ $registration_fields = [
     'profile_image' => 'image',
     'terms_agreement' => 'checkbox',
 ];
-define('URS_REGISTRATION_FIELDS', $registration_fields);
+define('WPT_REGISTRATION_FIELDS', $registration_fields);
 
 
-$urs_config = [
-    'URS_user_activation_link' => site_url('/actiavate-account'),
-    'URS_reset_password_link' => site_url('/reset-password'),
+$wpt_config = [
+    'wpt_user_activation_link' => site_url('/actiavate-account'),
+    'wpt_reset_password_link' => site_url('/reset-password'),
 ];
 
-define('URS_CONFIG', $urs_config);
-update_option('URS_CONFIG', URS_CONFIG);
+define('WPT_CONFIG', $wpt_config);
+update_option('WPT_CONFIG', WPT_CONFIG);

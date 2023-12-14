@@ -1,6 +1,6 @@
 <?php
 // Add this shortcode to your theme's functions.php file or a custom plugin
-add_shortcode('URS_forgot_password_form', 'custom_forgot_password_shortcode');
+add_shortcode('custom_forgot_password_form', 'custom_forgot_password_shortcode');
 
 function custom_forgot_password_shortcode() {
     ob_start(); ?>
@@ -9,8 +9,8 @@ function custom_forgot_password_shortcode() {
         <?php wp_nonce_field('forgot_password_nonce', 'forgot_password_nonce'); ?>
         <label for="username_or_email">Enter your email or username:</label>
         <input type="text" name="username_or_email" required>
-        <input type="hidden" name="URS_reset_password_link" value="<?php echo URS_CONFIG['URS_reset_password_link']; ?>">
-        <input type="submit" value="Reset Password" class="btn btn-primary button button-primary">
+        <input type="hidden" name="wpt_reset_password_link" value="<?php echo WPT_CONFIG['wpt_reset_password_link']; ?>">
+        <input type="submit" value="Reset Password">
     </form>
 
     <?php
@@ -36,7 +36,7 @@ function handle_forgot_password_form() {
             update_user_meta($user->ID, 'reset_password_token', $token);
 
             // Send an email to the user with a link to reset their password
-            $link = $_POST['URS_reset_password_link'];
+            $link = $_POST['wpt_reset_password_link'];
             $reset_link =  $link."?token=$token&user=" . $user->ID;
             $to = $user->user_email;
             $subject = "Password Reset";

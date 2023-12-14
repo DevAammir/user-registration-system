@@ -1,14 +1,14 @@
 <?php
-register_activation_hook(URS_FILE, 'URS_pages_upon_plugin_activation');
+register_activation_hook(URS_FILE, 'urs_pages_upon_plugin_activation');
 
-function URS_pages_upon_plugin_activation()
+function urs_pages_upon_plugin_activation()
 {
 
     $pages_array = array(
-        'Login' => array('content' => '[URS_user_login]', 'template' => ''),
-        'Register' => array('content' => '[URS_user_register]', 'template' => ''),
-        'Activate Account' => array('content' => '[URS_user_activation_form]', 'template' => ''),
-        'Reset Password' => array('content' => '[URS_forgot_password_form]', 'template' => ''),
+        'Login' => array('content' => '[wpt_user_login]', 'template' => ''),
+        'Register' => array('content' => '[wpt_user_register]', 'template' => ''),
+        'Activate Account' => array('content' => '[wpt_user_activation_form]', 'template' => ''),
+        'Reset Password' => array('content' => '[wpt_forgot_password_form]', 'template' => ''),
     );
 
     // Initialize an array to store messages
