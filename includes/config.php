@@ -35,9 +35,17 @@ define('WPT_REGISTRATION_FIELDS', $registration_fields);
 
 
 $wpt_config = [
-    'wpt_user_activation_link' =>  '/activate-account',
-    'wpt_reset_password_link' =>  '/reset-password',
+    'login' => 'Login',
+    'register' => 'Register',
+    'user_activation' =>  'Activate Account',
+    'forgot_password' =>  'Forgot Password',
+    'reset_password' =>  'Reset Password',
+    'logout' =>  'Logout',
 ];
 
-define('WPT_CONFIG', $wpt_config);
-update_option('WPT_CONFIG', WPT_CONFIG);
+update_option('WPT_CONFIG', $wpt_config);
+
+
+$wpt_config_saved = get_option('WPT_CONFIG');
+
+define('WPT_CONFIG', $wpt_config_saved);

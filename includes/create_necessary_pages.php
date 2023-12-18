@@ -1,23 +1,16 @@
 <?php
 register_activation_hook(URS_FILE, 'urs_pages_upon_plugin_activation');
 
-$activate_account_page = str_replace('_', ' ', WPT_CONFIG['wpt_user_activation_link']);
-$activate_account_page = ucfirst($activate_account_page);
-
-$reset_password_page = str_replace('_', ' ', WPT_CONFIG['wpt_reset_password_link']);
-$reset_password_page = ucfirst($reset_password_page);
-
-
 function urs_pages_upon_plugin_activation()
 {
 
     $pages_array = array(
-        'Login' => array('content' => '[wpt_user_login]', 'template' => ''),
-        'Register' => array('content' => '[wpt_user_register]', 'template' => ''),
-        'Activate Account' => array('content' => '[wpt_user_activation_form]', 'template' => ''),
-        'Forgot Password' => array('content' => '[wpt_forgot_password_form]', 'template' => ''),
-        'Reset Password' => array('content' => '[reset_password_form]', 'template' => ''),
-        'Logout' => array('content' => '[logout_user]', 'template' => ''),
+        WPT_CONFIG['login'] => array('content' => '[wpt_user_login]', 'template' => ''),
+        WPT_CONFIG['register'] => array('content' => '[wpt_user_register]', 'template' => ''),
+        WPT_CONFIG['register'] => array('content' => '[wpt_user_activation_form]', 'template' => ''),
+        WPT_CONFIG['forgot_password'] => array('content' => '[wpt_forgot_password_form]', 'template' => ''),
+        WPT_CONFIG['reset_password'] => array('content' => '[reset_password_form]', 'template' => ''),
+        WPT_CONFIG['logout'] => array('content' => '[logout_user]', 'template' => ''),
     );
 
     // Initialize an array to store messages
