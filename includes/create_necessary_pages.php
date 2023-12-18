@@ -15,7 +15,9 @@ function urs_pages_upon_plugin_activation()
         'Login' => array('content' => '[wpt_user_login]', 'template' => ''),
         'Register' => array('content' => '[wpt_user_register]', 'template' => ''),
         'Activate Account' => array('content' => '[wpt_user_activation_form]', 'template' => ''),
-        'Reset Password' => array('content' => '[wpt_forgot_password_form]', 'template' => ''),
+        'Forgot Password' => array('content' => '[wpt_forgot_password_form]', 'template' => ''),
+        'Reset Password' => array('content' => '[reset_password_form]', 'template' => ''),
+        'Logout' => array('content' => '[logout_user]', 'template' => ''),
     );
 
     // Initialize an array to store messages

@@ -166,7 +166,7 @@ jQuery(document).ready(function($) {
                     var jsonResponse = JSON.parse(response);
 
                     // Check the response and display messages accordingly
-                    if (jsonResponse && jsonResponse.status === 200) {
+                    if (jsonResponse.status === 200) {
                         console.log('Registration successful');
                         $('#response').html('<div class="success">' + jsonResponse.message +'</div>');
                         $('#wpt-user-register-form').remove();
