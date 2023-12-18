@@ -9,7 +9,7 @@ function custom_forgot_password_shortcode() {
         <?php wp_nonce_field('forgot_password_nonce', 'forgot_password_nonce'); ?>
         <label for="username_or_email">Enter your email or username:</label>
         <input type="text" name="username_or_email" required>
-        <input type="hidden" name="wpt_reset_password_link" value="<?php echo esc_url(WPT_CONFIG['wpt_reset_password_link']); ?>">
+        <input type="hidden" name="reset_password" value="<?php echo make_label_to_link(WPT_CONFIG['reset_password']); ?>">
         <input type="submit" value="Reset Password">
     </form>
 
@@ -35,11 +35,11 @@ function handle_forgot_password_form() {
             update_user_meta($user->ID, 'reset_password_token', $token);
 
             // Send an email to the user with a link to reset their password
-            $link = esc_url($_POST['wpt_reset_password_link']);
-            $reset_link = $link . "?token=$token&user=" . $user->ID;
+            $link = ($_POST['reset_password']);
+            $reset_link = $link . "?token=$token&u=" . $user->ID;
             $to = $user->user_email;
             $subject = "Password Reset";
-           echo  $message = "Click <a href='" . esc_url($reset_link) . "'>Here</a> to reset your password";
+           echo  $message = "Click <a href='" .$reset_link . "'>Here</a> to reset your password";
             $admin_email = get_option('admin_email');
             $headers = "From: " . esc_html($admin_email); // Change this to your email address
 
@@ -62,7 +62,7 @@ function reset_password_form() {
 
     // Get token and user ID from the query parameters
     $token = isset($_GET['token']) ? sanitize_text_field($_GET['token']) : '';
-    $user_id = isset($_GET['user']) ? absint($_GET['user']) : 0;
+    $user_id = isset($_GET['u']) ? absint($_GET['u']) : 0;
 
     // Validate the token and user ID
     if ($token && $user_id) {

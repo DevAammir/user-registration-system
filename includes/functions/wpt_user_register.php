@@ -18,7 +18,7 @@ function user_register_cb()
             ]); ?>
     <?php endforeach; ?>
 
-    <input type="hidden" name="wpt_user_activation_link" value="<?php echo WPT_CONFIG['wpt_user_activation_link']; ?>">
+    <input type="hidden" name="user_activation" value="<?php echo make_label_to_link(WPT_CONFIG['user_activation']); ?>">
 
     <?php FORMBUILDER->field([
             'type'  => 'submit',
@@ -29,7 +29,7 @@ function user_register_cb()
         ]); ?>
 </form>
 <div id="wpt-user-register-success" style="display:none;">
-    <?php $activation_link = "<a href='" . WPT_CONFIG['wpt_user_activation_link'] . "'>Here.</a>"; ?>
+    <?php $activation_link = "<a href='" . make_label_to_link(WPT_CONFIG['user_activation']) . "'>Here.</a>"; ?>
     <h3>Registration Successful</h3>
     <p>Thank you for registering with us.</p>
     <p>Please check your email for activation code.</p>
@@ -242,7 +242,7 @@ function wpt_register_user()
         $billing_country = sanitize_text_field($_POST['billing_country']);
         $profile_image = $_FILES['profile_image'];
         $username = $first_name; // . '-' . $last_name;
-        $wpt_user_activation_link = site_url().$_POST['wpt_user_activation_link'];
+        $user_activation = $_POST['user_activation'];
         $status = 400;
         $message = '';
         $redirect = '';
@@ -308,7 +308,7 @@ function wpt_register_user()
                 $email_body =  "Hello " . $first_name . " " . $last_name . " and Welcome to  $website  <br /><br />
                 You have successfully registered with us.<br />
                  $wpt_activation_code is your code for activation.<br />
-                You can activate your account <a href='$wpt_user_activation_link'>Here</a> by entering this code.<br />
+                You can activate your account <a href='$user_activation'>Here</a> by entering this code.<br />
                 <br />
                 Regards,
                 $website team.";

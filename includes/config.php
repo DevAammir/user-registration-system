@@ -3,7 +3,12 @@
 
 
 $available_options_array = [ 
-    'URS_error_reporting' => 'Turn error reporting on',
+    'login' => 'Login',
+    'register' => 'Register',
+    'user_activation' =>  'Activate Account',
+    'forgot_password' =>  'Forgot Password',
+    'reset_password' =>  'Reset Password',
+    'logout' =>  'Logout',
 ];
 
 
@@ -34,16 +39,7 @@ $registration_fields = [
 define('WPT_REGISTRATION_FIELDS', $registration_fields);
 
 
-$wpt_config = [
-    'login' => 'Login',
-    'register' => 'Register',
-    'user_activation' =>  'Activate Account',
-    'forgot_password' =>  'Forgot Password',
-    'reset_password' =>  'Reset Password',
-    'logout' =>  'Logout',
-];
 
-update_option('WPT_CONFIG', $wpt_config);
 
 
 $wpt_config_saved = get_option('WPT_CONFIG');

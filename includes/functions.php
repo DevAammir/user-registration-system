@@ -87,3 +87,8 @@ function redirect_logged_in_users() {
         }); 
     }
 }
+
+function make_label_to_link($label){
+    $path = strtolower(str_replace(' ', '-', $label));
+    return site_url('/'.$path);
+}

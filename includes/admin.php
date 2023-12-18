@@ -23,9 +23,9 @@ function URS_admin_page()
 ?>
     <div id="admin_page" class="wrap">
         <h2>User Registration System</h2>
-        <div class="clearfix">&nbsp;</div>
+        <div class="clearfix"><?php URS_save_settings();?></div>
 
-        <form method="post" action="#" id="URS_save_settings_form">
+        <form method="post">
             <ul class="tabs">
                 <li class="tab active" onclick="showContent('tab1', this);">Basic Settings</li>
 
@@ -52,7 +52,7 @@ function URS_admin_page()
             </div> -->
             <?php
             FORMBUILDER->field([
-                'type' => 'button',
+                'type' => 'submit',
                 'label' => 'Save Settings',
                 'name' => 'URS_save_settings',
                 'id' => 'URS_save_settings',
@@ -65,26 +65,6 @@ function URS_admin_page()
     </div>
 
     <script>
-        admin_ajax_url = "<?php echo URS_AJAX; ?>";
-
-
-        (function($) {
-            $(document).ready(function() {
-                console.log('Welcome to WordPress Toolkit!');
-
-                <?php //$page = wpl_URL . 'includes/page.php'; 
-                ?>
-
-                $(document).on('click', '#URS_save_settings', function(e) {
-                    e.preventDefault();
-                    let form_data = $('#URS_save_settings_form').serialize();
-                    // debugger;
-                    _AJAX_function_1('#target', admin_ajax_url, 'URS_save_settings', 'POST', form_data, 'json');
-                });
-
-
-            });
-        })(jQuery);
         //TABS
         function showContent(tabId, element) {
             // Hide all content
@@ -192,37 +172,28 @@ function URS_admin_page()
 /***
  * SET VALUES
  * ***/
-add_action("wp_ajax_URS_save_settings", "URS_save_settings");
-add_action("wp_ajax_nopriv_URS_save_settings", "URS_save_settings");
 function URS_save_settings()
 {
+    if(isset($_POST['URS_save_settings'])):
     ob_start();
-    $URS_settings = [];
-    $URS_socialmedia = [];
+    $WPT_CONFIG = [];
     foreach ($_POST as $key => $value) {
-        if (strpos($key, 'sm_') === 0) {
-            $URS_socialmedia[$key] = $value;
-        } else {
-            $URS_settings[$key] = $value;
-        }
+            $WPT_CONFIG[$key] = $value;
     }
 
 
 
 
     // update the options in one go
-    update_option('URS_settings', $URS_settings);
-    update_option('URS_socialmedia', $URS_socialmedia);
+    update_option('WPT_CONFIG', $WPT_CONFIG); 
+    urs_pages_creation();
 ?>
-    <!-- <div id="settings_updated" class="notice notice-alternate notice-success notice  is-dismissible"> -->
+    <div id="settings_updated" class="notice notice-alternate notice-success notice  is-dismissible">
     <p><strong>Settings updated.</strong></p>
-    <!-- </div> -->
+    </div>
 <?php
 
     $result = ob_get_clean();
-    $status = 1;
-    $message = "success";
-    $return = json_encode(array('result' => $result, 'status' => $status, 'message' => $message, 'request' => $_REQUEST, 'args' => $args));
-    echo $return;
-    exit;
+ echo $result;
+    endif;
 }
