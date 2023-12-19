@@ -1,6 +1,6 @@
 <?php
 // Add this shortcode to your theme's functions.php file or a custom plugin
-add_shortcode('wpt_forgot_password_form', 'custom_forgot_password_shortcode');
+add_shortcode('urs_forgot_password_form', 'custom_forgot_password_shortcode');
 
 function custom_forgot_password_shortcode() {
     ob_start(); ?>
@@ -9,7 +9,7 @@ function custom_forgot_password_shortcode() {
         <?php wp_nonce_field('forgot_password_nonce', 'forgot_password_nonce'); ?>
         <label for="username_or_email">Enter your email or username:</label>
         <input type="text" name="username_or_email" required>
-        <input type="hidden" name="reset_password" value="<?php echo make_label_to_link(WPT_CONFIG['reset_password']); ?>">
+        <input type="hidden" name="reset_password" value="<?php echo make_label_to_link(URS_CONFIG['reset_password']); ?>">
         <input type="submit" value="Reset Password">
     </form>
 

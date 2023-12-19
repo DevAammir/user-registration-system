@@ -1,7 +1,7 @@
 <?php 
 
 //  
-add_shortcode('wpt_user_activation_form', 'activation_form_shortcode');
+add_shortcode('urs_user_activation_form', 'activation_form_shortcode');
 
 function activation_form_shortcode() {
     ob_start(); ?>
@@ -28,7 +28,7 @@ function handle_activation_form() {
 
         // Find user with matching activation code in user meta
         $user_query = new WP_User_Query(array(
-            'meta_key' => 'wpt_activation_code',
+            'meta_key' => 'urs_activation_code',
             'meta_value' => $activation_code,
         ));
 
@@ -38,7 +38,7 @@ function handle_activation_form() {
         if (!empty($users)) {
             foreach ($users as $user) {
                 // Update user meta to enable the account
-                update_user_meta($user->ID, 'wpt_user_status', 'enabled');
+                update_user_meta($user->ID, 'urs_user_status', 'enabled');
             }
 
             echo 'User account activated successfully.';

@@ -19,8 +19,7 @@ if (CURRENT_THEME == 'wp-lite') {
     $fb = new FormBuilder();
     define('FORMBUILDER', $fb);
 }
-$URS_settings = get_option('URS_settings'); 
-define('URS_SETTINGS', $URS_settings); 
+
 
 $registration_fields = [
     'first_name' => 'text',
@@ -36,12 +35,9 @@ $registration_fields = [
     'profile_image' => 'image',
     'terms_agreement' => 'checkbox',
 ];
-define('WPT_REGISTRATION_FIELDS', $registration_fields);
+define('URS_REGISTRATION_FIELDS', $registration_fields);
 
 
+$urs_config_saved = get_option('URS_CONFIG');
 
-
-
-$wpt_config_saved = get_option('WPT_CONFIG');
-
-define('WPT_CONFIG', $wpt_config_saved);
+define('URS_CONFIG', $urs_config_saved);

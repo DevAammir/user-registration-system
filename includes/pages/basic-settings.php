@@ -6,7 +6,7 @@ foreach (AVAILABLE_OPTIONS as $key => $value) {
         'label' => $value,
         'name' => $key,
         'id' => $key,
-        'dbval' => !empty(WPT_CONFIG[$key]) ? WPT_CONFIG[$key] : '',
+        'dbval' => !empty(URS_CONFIG[$key]) ? URS_CONFIG[$key] : '',
     ]);
 }
 echo '<hr>';

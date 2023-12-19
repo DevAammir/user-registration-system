@@ -4,46 +4,46 @@ function user_login_cb()
     ob_start();
 
     // Add nonce field to the form
-    wp_nonce_field('wpt_login_nonce', 'wpt_login_nonce_field');
+    wp_nonce_field('urs_login_nonce', 'urs_login_nonce_field');
 ?>
-    <form action="#" method="post" id="wpt-user-login-form">
+    <form action="#" method="post" id="urs-user-login-form">
         <div id="response"></div>
         <?php FORMBUILDER->field([
             'type'  => 'text',
             'label' => 'Username',
-            'name'  => 'wpt_username',
-            'id'    => 'wpt_username',
+            'name'  => 'urs_username',
+            'id'    => 'urs_username',
             'class' => 'form-control',
         ]); ?>
 
         <?php FORMBUILDER->field([
             'type'  => 'password',
             'label' => 'Password',
-            'name'  => 'wpt_password',
-            'id'    => 'wpt_password',
+            'name'  => 'urs_password',
+            'id'    => 'urs_password',
             'class' => 'form-control',
         ]); ?>
 
         <?php FORMBUILDER->field([
             'type'  => 'submit',
             'label' => 'Login',
-            'name'  => 'wpt_user_login_button',
-            'id'    => 'wpt_user_login_button',
+            'name'  => 'urs_user_login_button',
+            'id'    => 'urs_user_login_button',
             'class' => 'button button-primary btn btn-primary',
         ]); ?>
     </form>
 
     <script>
         jQuery(document).ready(function($) {
-            let WPT_AJAX = '<?php echo admin_url('admin-ajax.php'); ?>';
+            let urs_AJAX = '<?php echo admin_url('admin-ajax.php'); ?>';
 
             // Attach a click event handler to the login button
-            $('#wpt_user_login_button').on('click', function(e) {
+            $('#urs_user_login_button').on('click', function(e) {
                 e.preventDefault(); // Prevent the default form submission
 // debugger;
                 // Get the username and password values
-                var username = $('#wpt_username').val();
-                var password = $('#wpt_password').val();
+                var username = $('#urs_username').val();
+                var password = $('#urs_password').val();
 
                 // Check if username and password are not empty
                 if (username === '' || password === '') {
@@ -53,13 +53,13 @@ function user_login_cb()
 
                 // Add nonce to the data
                 var data = {
-                    action: 'wpt_login_user',
+                    action: 'urs_login_user',
                     username: username,
                     password: password,
-                    wpt_login_nonce: '<?php echo wp_create_nonce("wpt_login_nonce"); ?>'
+                    urs_login_nonce: '<?php echo wp_create_nonce("urs_login_nonce"); ?>'
                 };
 
-                $.post(WPT_AJAX, data, function(response) {
+                $.post(urs_AJAX, data, function(response) {
                     console.log(response); // Log the response to the console
 
                     // Parse the JSON response
@@ -72,7 +72,7 @@ function user_login_cb()
                     if (result.status === 200) {
                         window.location.href = result.redirect;
                     } else {
-                        jQuery('.error a').attr('href', '<?php echo make_label_to_link(WPT_CONFIG['forgot_password']); ?>');
+                        jQuery('.error a').attr('href', '<?php echo make_label_to_link(URS_CONFIG['forgot_password']); ?>');
                     }
                 });
             });
@@ -87,12 +87,12 @@ function user_login_cb()
     return $return;
 }
 
-add_shortcode('wpt_user_login', 'user_login_cb');
+add_shortcode('urs_user_login', 'user_login_cb');
 
-function wpt_login_user()
+function urs_login_user()
 {
     // Verify the nonce
-    if (!isset($_POST['wpt_login_nonce']) || !wp_verify_nonce($_POST['wpt_login_nonce'], 'wpt_login_nonce')) {
+    if (!isset($_POST['urs_login_nonce']) || !wp_verify_nonce($_POST['urs_login_nonce'], 'urs_login_nonce')) {
         $message = '<div class="error">Nonce verification failed.</div>';
         $status = 400;
     } else {
@@ -135,5 +135,5 @@ function wpt_login_user()
     wp_die();
 }
 
-add_action('wp_ajax_wpt_login_user', 'wpt_login_user');
-add_action('wp_ajax_nopriv_wpt_login_user', 'wpt_login_user'); // For non-logged-in users
+add_action('wp_ajax_urs_login_user', 'urs_login_user');
+add_action('wp_ajax_nopriv_urs_login_user', 'urs_login_user'); // For non-logged-in users

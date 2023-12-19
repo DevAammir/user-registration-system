@@ -2,11 +2,11 @@
 include_once 'functions/_common_functions.php';
 include_once 'functions/create_user.php';
 include_once 'functions/update_usermeta.php';
-include_once 'functions/_wpt_upload_user_image.php';
-include_once 'functions/wpt_user_login.php';
-include_once 'functions/wpt_user_register.php'; // 
-include_once 'functions/wpt_user_activation.php'; //  
-include_once 'functions/wpt_forgot_password.php'; //  
+include_once 'functions/_urs_upload_user_image.php';
+include_once 'functions/urs_user_login.php';
+include_once 'functions/urs_user_register.php'; // 
+include_once 'functions/urs_user_activation.php'; //  
+include_once 'functions/urs_forgot_password.php'; //  
 include_once 'functions/user_logout.php'; //  
 
 
@@ -36,8 +36,8 @@ function redirect_logged_in_users() {
         });
 
         add_action('wp_footer', function() {
-            $login_link = strtolower(str_replace(' ', '-', WPT_CONFIG['login']));
-            $register_link = strtolower(str_replace(' ', '-', WPT_CONFIG['register']));
+            $login_link = strtolower(str_replace(' ', '-', URS_CONFIG['login']));
+            $register_link = strtolower(str_replace(' ', '-', URS_CONFIG['register']));
             ?>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -64,7 +64,7 @@ function redirect_logged_in_users() {
         <style>.logout{display:none !important;}</style>
         <?php
           add_action('wp_footer', function() {
-            $logout_link = strtolower(str_replace(' ', '-', WPT_CONFIG['logout']));
+            $logout_link = strtolower(str_replace(' ', '-', URS_CONFIG['logout']));
             ?>
             <script>
                 document.addEventListener('DOMContentLoaded', function() {

@@ -12,9 +12,9 @@
  * @additional  can test with this shortcode [image_upload_test] 
  * NOTE that this only processes the image and saves to the database the URL of the image. 
  */
-function _wpt_upload_user_image($params)
+function _urs_upload_user_image($params)
 {
-    if($params == 'help'){_wpt_upload_user_image_help();die();}
+    if($params == 'help'){_urs_upload_user_image_help();die();}
     $user_identifier = $params['user_identifier'];
     $image = $params['image'];
 
@@ -44,7 +44,7 @@ function _wpt_upload_user_image($params)
     // Check if the file was successfully moved
     if (move_uploaded_file($image['tmp_name'], $new_image_path)) {
         $full_image_url = $upload_dir['baseurl'] . '/users/' . $new_image_name;
-        update_user_meta($user->ID, 'wpt_profile_image', $full_image_url);
+        update_user_meta($user->ID, 'urs_profile_image', $full_image_url);
         return 1;
     } else {
         // Handle upload error
@@ -66,7 +66,7 @@ function image_upload_test_cb()
             $image = $_FILES['user_profile_image'];
 
             // Call the uploadImage function
-            $result = _wpt_upload_user_image(['user_identifier' => 'joe', 'image' => $image]);
+            $result = _urs_upload_user_image(['user_identifier' => 'joe', 'image' => $image]);
 
             echo $result;
         } else {
@@ -89,16 +89,16 @@ function image_upload_test_cb()
 
 
 
-function _wpt_upload_user_image_help()
+function _urs_upload_user_image_help()
 {
 ?>
-  <h3>_wpt_upload_user_image() help</h3>
+  <h3>_urs_upload_user_image() help</h3>
   <code>
     $params = [
       'user_identifier' => 'user_id_or_username',
       'image'           => 'image_data'
     ];<br/><br/>
-    _wpt_upload_user_image($params);<br/>
+    _urs_upload_user_image($params);<br/>
   </code><br/><br/>
   <p>Uploads a user image to the server.</p>
 

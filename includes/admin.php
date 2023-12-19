@@ -1,7 +1,5 @@
 <?php
 
-
-// Add a menu item to the WordPress admin menu
 function URS_admin_menu()
 {
     add_menu_page(
@@ -59,9 +57,9 @@ function URS_admin_page()
                 'class' => 'button button-primary btn btn-primary',
             ]); ?>
         </form>
-        <div class="clearfix" id="target">
+        <!-- <div class="clearfix" id="target">
             <div id="loader" style="display: none;">&nbsp;</div>
-        </div>
+        </div> -->
     </div>
 
     <script>
@@ -176,23 +174,26 @@ function URS_save_settings()
 {
     if(isset($_POST['URS_save_settings'])):
     ob_start();
-    $WPT_CONFIG = [];
+    $URS_CONFIG = [];
     foreach ($_POST as $key => $value) {
-            $WPT_CONFIG[$key] = $value;
+            $URS_CONFIG[$key] = $value;
     }
-
-
-
-
-    // update the options in one go
-    update_option('WPT_CONFIG', $WPT_CONFIG); 
-    urs_pages_creation();
+    
+    update_option('URS_CONFIG', $URS_CONFIG); 
+    $pages_creation = urs_pages_creation();
+    if($pages_creation == 1):
 ?>
     <div id="settings_updated" class="notice notice-alternate notice-success notice  is-dismissible">
-    <p><strong>Settings updated.</strong></p>
+    <p><strong>Necessary Pages created and Settings updated.</strong></p>
     </div>
 <?php
-
+    else:
+?>
+    <div id="settings_not_updated" class="notice notice-alternate notice-error notice  is-dismissible">
+    <p><strong>An Error Occurred. Please try again later.</strong></p>
+    </div>
+<?php
+    endif; 
     $result = ob_get_clean();
  echo $result;
     endif;

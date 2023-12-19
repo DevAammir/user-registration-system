@@ -18,9 +18,9 @@
  *               - result (string|int): The result of the user creation. If successful, the user ID is returned.
  * 
  */
-function wpt_create_user($params)
+function urs_create_user($params)
 {
-    if($params == 'help'){wpt_create_user_help();die();}
+    if($params == 'help'){urs_create_user_help();die();}
     $username = sanitize_text_field($params['username']);
     $email = sanitize_text_field($params['email']);
     $password = sanitize_text_field($params['password']);
@@ -83,10 +83,10 @@ function wpt_create_user($params)
 
 
 
-function wpt_create_user_help()
+function urs_create_user_help()
 {
 ?>
-  <h3>wpt_create_user() help</h3>
+  <h3>urs_create_user() help</h3>
   <code>
     $params = [
       'username' => '',
@@ -94,7 +94,7 @@ function wpt_create_user_help()
       'password' => '',
       'role'     => 'subscriber'
     ];<br/><br/>
-    wpt_create_user($params);<br/>
+    urs_create_user($params);<br/>
   </code><br/><br/>
   <p>Creates a new user with the given parameters.</p>
 

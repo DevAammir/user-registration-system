@@ -4,10 +4,10 @@ function user_register_cb()
     ob_start();
     
 ?>
-<form action="#" method="post" id="wpt-user-register-form" enctype="multipart/form-data">
-    <?php wp_nonce_field('wpt_register_nonce', 'wpt_register_nonce'); ?>
+<form action="#" method="post" id="urs-user-register-form" enctype="multipart/form-data">
+    <?php wp_nonce_field('urs_register_nonce', 'urs_register_nonce'); ?>
     <div id="response"></div>
-    <?php foreach (WPT_REGISTRATION_FIELDS as $key => $value) : ?>
+    <?php foreach (URS_REGISTRATION_FIELDS as $key => $value) : ?>
         <?php $label = str_replace('Billing', ' ',str_replace('_', ' ', ucfirst($key))); $label = trim(ucfirst($label)); ?>
     <?php FORMBUILDER->field([
                 'type'  => $value,
@@ -19,18 +19,18 @@ function user_register_cb()
             ]); ?>
     <?php endforeach; ?>
 
-    <input type="hidden" name="user_activation" value="<?php echo make_label_to_link(WPT_CONFIG['user_activation']); ?>">
+    <input type="hidden" name="user_activation" value="<?php echo make_label_to_link(URS_CONFIG['user_activation']); ?>">
 
     <?php FORMBUILDER->field([
             'type'  => 'submit',
             'label' => 'Register',
-            'name'  => 'wpt_user_register_button',
-            'id'    => 'wpt_user_register_button',
+            'name'  => 'urs_user_register_button',
+            'id'    => 'urs_user_register_button',
             'class' => 'button button-primary btn btn-primary',
         ]); ?>
 </form>
-<div id="wpt-user-register-success" style="display:none;">
-    <?php $activation_link = "<a href='" . make_label_to_link(WPT_CONFIG['user_activation']) . "'>Here.</a>"; ?>
+<div id="urs-user-register-success" style="display:none;">
+    <?php $activation_link = "<a href='" . make_label_to_link(URS_CONFIG['user_activation']) . "'>Here.</a>"; ?>
     <h3>Registration Successful</h3>
     <p>Thank you for registering with us.</p>
     <p>Please check your email for activation code.</p>
@@ -42,7 +42,7 @@ function user_register_cb()
 </div>
 <script>
 jQuery(document).ready(function($) {
-    $(document).on('click', '#wpt_user_register_button', function(event) {
+    $(document).on('click', '#urs_user_register_button', function(event) {
         event.preventDefault();
 
         // Clear previous error messages
@@ -146,16 +146,16 @@ jQuery(document).ready(function($) {
 
         // If all validations pass, proceed with AJAX submission
         if (valid) {
-            var formData = new FormData($('#wpt-user-register-form')[0]);
-            let WPT_AJAX = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
+            var formData = new FormData($('#urs-user-register-form')[0]);
+            let urs_AJAX = '<?php echo esc_url(admin_url('admin-ajax.php')); ?>';
             // Add nonce to the data
-            formData.append('action', 'wpt_register_user');
-            formData.append('wpt_register_nonce',
-                '<?php echo wp_create_nonce("wpt_register_nonce"); ?>');
+            formData.append('action', 'urs_register_user');
+            formData.append('urs_register_nonce',
+                '<?php echo wp_create_nonce("urs_register_nonce"); ?>');
 
             // Your AJAX code
             $.ajax({
-                url: WPT_AJAX,
+                url: urs_AJAX,
                 type: 'POST',
                 data: formData,
                 processData: false,
@@ -170,8 +170,8 @@ jQuery(document).ready(function($) {
                     if (jsonResponse.status === 200) {
                         console.log('Registration successful');
                         $('#response').html('<div class="success">' + jsonResponse.message +'</div>');
-                        $('#wpt-user-register-form').remove();
-                        $('#wpt-user-register-success').show();
+                        $('#urs-user-register-form').remove();
+                        $('#urs-user-register-success').show();
                         $('#test_email').html(jsonResponse.email_body);
                     } else {
                         console.log('Registration failed:', jsonResponse.message);
@@ -219,15 +219,15 @@ jQuery(document).ready(function($) {
     return $return;
 }
 
-add_shortcode('wpt_user_register', 'user_register_cb');
+add_shortcode('urs_user_register', 'user_register_cb');
 
 
 
 
-function wpt_register_user()
+function urs_register_user()
 {
     // Verify the nonce
-    if (!isset($_POST['wpt_register_nonce']) || !wp_verify_nonce($_POST['wpt_register_nonce'], 'wpt_register_nonce')) {
+    if (!isset($_POST['urs_register_nonce']) || !wp_verify_nonce($_POST['urs_register_nonce'], 'urs_register_nonce')) {
         $message = '<div class="error">Nonce verification failed.</div>';
         $status = 400;
     } else {
@@ -270,10 +270,10 @@ function wpt_register_user()
                 'role' => 'subscriber',
             ];
 
-            $user_id = wpt_create_user($user_data);
+            $user_id = urs_create_user($user_data);
             
             // Handle profile image upload
-            $IMG_UPL = _wpt_upload_user_image([
+            $IMG_UPL = _urs_upload_user_image([
                 'user_identifier' => $user_id,
                 'image'           => $profile_image
             ]);
@@ -284,9 +284,9 @@ function wpt_register_user()
 
                 // $confirmation_token = md5(uniqid(wp_rand(), true));
 
-                $wpt_activation_code = _wpt_generate_random_string(5);
+                $urs_activation_code = _urs_generate_random_string(5);
                 $user_metadata = [
-                    'wpt_user_status' => 'disabled',
+                    'urs_user_status' => 'disabled',
                     'first_name' => $first_name,
                     'billing_first_name' => $first_name,
                     'last_name' => $last_name,
@@ -297,7 +297,7 @@ function wpt_register_user()
                     'billing_state' => $billing_state,
                     'billing_country' => $billing_country,
                     // 'confirmation_token' => $confirmation_token,
-                    'wpt_activation_code' => $wpt_activation_code,
+                    'urs_activation_code' => $urs_activation_code,
                 ];
 
                 foreach ($user_metadata as $key => $value) {
@@ -305,10 +305,10 @@ function wpt_register_user()
                 }
                 $website = get_bloginfo('name');
                 // $activation_link = "<a href='".site_url('/activate')."'>This link</a>";
-                $wpt_config = get_option('WPT_CONFIG');
+                $URS_CONFIG = get_option('URS_CONFIG');
                 $email_body =  "Hello " . $first_name . " " . $last_name . " and Welcome to  $website  <br /><br />
                 You have successfully registered with us.<br />
-                 $wpt_activation_code is your code for activation.<br />
+                 $urs_activation_code is your code for activation.<br />
                 You can activate your account <a href='$user_activation'>Here</a> by entering this code.<br />
                 <br />
                 Regards,
@@ -333,8 +333,8 @@ function wpt_register_user()
     wp_die();
 }
 
-add_action('wp_ajax_wpt_register_user', 'wpt_register_user');
-add_action('wp_ajax_nopriv_wpt_register_user', 'wpt_register_user');
+add_action('wp_ajax_urs_register_user', 'urs_register_user');
+add_action('wp_ajax_nopriv_urs_register_user', 'urs_register_user');
 
 
 // FOR ADMIN PANEL
@@ -342,7 +342,7 @@ add_action('wp_ajax_nopriv_wpt_register_user', 'wpt_register_user');
 // DISPLAY
 function custom_user_profile_columns($columns)
 {
-    $columns['wpt_profile_image'] = 'Profile Image';
+    $columns['urs_profile_image'] = 'Profile Image';
     return $columns;
 }
 add_filter('manage_users_columns', 'custom_user_profile_columns');
@@ -350,8 +350,8 @@ add_filter('manage_users_columns', 'custom_user_profile_columns');
 /*
 // Add custom column data
 function custom_user_profile_data($value, $column_name, $user_id) {
-    if ($column_name === 'wpt_profile_image') {
-        $profile_image = get_user_meta($user_id, 'wpt_profile_image', true);
+    if ($column_name === 'urs_profile_image') {
+        $profile_image = get_user_meta($user_id, 'urs_profile_image', true);
         
         // Display the profile image
         if (!empty($profile_image)) {
@@ -374,9 +374,9 @@ function custom_user_profile_fields($user) {
 <h3><?php _e('Profile Image', 'your-textdomain'); ?></h3>
 <table class="form-table">
     <tr>
-        <th><label for="wpt_profile_image"><?php _e('Upload Image', 'your-textdomain'); ?></label></th>
+        <th><label for="urs_profile_image"><?php _e('Upload Image', 'your-textdomain'); ?></label></th>
         <td>
-            <input type="file" name="wpt_profile_image" id="wpt_profile_image" />
+            <input type="file" name="urs_profile_image" id="urs_profile_image" />
             <span class="description"><?php _e('Upload your profile image.', 'your-textdomain'); ?></span>
         </td>
     </tr>
@@ -388,10 +388,10 @@ add_action('edit_user_profile', 'custom_user_profile_fields');
 
 // Save custom field
 function save_custom_user_profile_fields($user_id) {
-    if (isset($_FILES['wpt_profile_image'])) {
-        $attachment_id = media_handle_upload('wpt_profile_image', $user_id);
+    if (isset($_FILES['urs_profile_image'])) {
+        $attachment_id = media_handle_upload('urs_profile_image', $user_id);
         if (!is_wp_error($attachment_id)) {
-            update_user_meta($user_id, 'wpt_profile_image', wp_get_attachment_url($attachment_id));
+            update_user_meta($user_id, 'urs_profile_image', wp_get_attachment_url($attachment_id));
         }
     }
 }
