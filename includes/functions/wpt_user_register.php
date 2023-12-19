@@ -8,10 +8,11 @@ function user_register_cb()
     <?php wp_nonce_field('wpt_register_nonce', 'wpt_register_nonce'); ?>
     <div id="response"></div>
     <?php foreach (WPT_REGISTRATION_FIELDS as $key => $value) : ?>
+        <?php $label = str_replace('Billing', ' ',str_replace('_', ' ', ucfirst($key))); $label = trim(ucfirst($label)); ?>
     <?php FORMBUILDER->field([
                 'type'  => $value,
-                'label' => str_replace('_', ' ', ucfirst($key)),
-                'placeholder' => str_replace('_', ' ', ucfirst($key)),
+                'label' => $label,
+                'placeholder' =>  $label,
                 'name'  => $key,
                 'id'    => $key,
                 'class' => 'form-control',

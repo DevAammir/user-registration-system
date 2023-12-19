@@ -3,7 +3,7 @@
 /**
  * Plugin Name: User Registration System by Aamir
  * Description: User Registration System by Aamir
- * Version: 0.8
+ * Version: 0.8.1
  * Author: Aammir
  * Author URI: https://127.0.0.1
  * Text Domain: urs
