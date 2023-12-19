@@ -72,7 +72,7 @@ function user_login_cb()
                     if (result.status === 200) {
                         window.location.href = result.redirect;
                     } else {
-                        $('.error a').attr('href', '<?php echo home_url(); ?>/'.WPT_CONFIG['wpt_reset_password_link']);
+                        jQuery('.error a').attr('href', '<?php echo make_label_to_link(WPT_CONFIG['forgot_password']); ?>');
                     }
                 });
             });
