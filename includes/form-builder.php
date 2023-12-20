@@ -1,12 +1,12 @@
 <?php
 /* * * *
- * Class: FormBuilder
+ * Class: FORMBUILDER
  * Version: 12
  * Date: 7 December, 2023
  * Description: Creates form fields, bugfixes in the version
  * Fields: 'text','password', 'textarea', 'email', 'checkbox', 'radio', 'select','countries','kvselect' 'multiselect', 'multiple', 'date','date_special', 'image','wp_color', 'wp_upload', 'wp_upload_multiple','range', 'submit', 'button', 'reset'
  * * * * */
-class FormBuilder
+class FORMBUILDER
 {
     
     public $args_help = array(

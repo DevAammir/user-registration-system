@@ -3,7 +3,7 @@
 /**
  * Plugin Name: User Registration System by Aamir
  * Description: User Registration System by Aamir
- * Version: 0.9
+ * Version: 1.0
  * Author: Aammir
  * Author URI: https://127.0.0.1
  * Text Domain: urs
@@ -17,10 +17,13 @@ if (!defined('ABSPATH')) {
 define('URS_URL', plugin_dir_url(__FILE__)); // Get the plugin URL 
 define('URS_DIR', dirname(__FILE__) . '/'); // Get the plugin directory path that is wp-content/plugins/wp-toolkit
 define('URS_AJAX', admin_url('admin-ajax.php'));
-$current_theme = get_stylesheet();
-define('CURRENT_THEME', $current_theme);
+$current_theme_active = get_stylesheet();
+define('THE_CURRENT_THEME', $current_theme_active);
 
-if (CURRENT_THEME !== 'wp-lite') {
+include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+$wpt_path = 'wp-toolkit/index.php';
+
+if (THE_CURRENT_THEME !== 'wp-lite' || !is_plugin_active($wpt_path)) {
     require_once URS_DIR . 'includes/form-builder.php';
     add_action('admin_enqueue_scripts', 'enqueue_custom_scripts', 10);
     add_action('wp_enqueue_scripts', 'enqueue_custom_scripts');
@@ -49,10 +52,10 @@ require_once URS_DIR . 'includes/functions.php';
 
 
 // Activation Hook
-register_activation_hook(__FILE__, 'your_plugin_activation_message');
+register_activation_hook(__FILE__, 'URS_plugin_activation_message');
 
 // Activation Function
-function your_plugin_activation_message() {
+function URS_plugin_activation_message() {
     // Display your custom message
     add_option('_plugin_activation_message', '<em>Please set up pages <strong><a href="/wp-admin/admin.php?page=URS-admin" target="_blank">here</a></strong> in orer to use this plugin.</em>');
 }

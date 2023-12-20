@@ -1,5 +1,5 @@
 <?php
-include_once 'functions/_common_functions.php';
+include_once 'functions/common_functions.php';
 include_once 'functions/create_user.php';
 include_once 'functions/update_usermeta.php';
 include_once 'functions/_urs_upload_user_image.php';

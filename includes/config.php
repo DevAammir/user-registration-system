@@ -13,7 +13,7 @@ $available_options_array = [
 
 
 define('AVAILABLE_OPTIONS', $available_options_array);
-if (CURRENT_THEME == 'wp-lite') {
+if (THE_CURRENT_THEME == 'wp-lite') {
 }else{
     
     $fb = new FormBuilder();
